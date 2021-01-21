@@ -1,0 +1,7 @@
+<!-- <p>users works! {{heros}}</p> -->
+<p>name: {{name}}</p>
+<h1 *ngFor="let hero of heros">{{hero}}</h1>
+<!-- <li *ngFor="let user of users; index as i; first as isFirst">
+    {{i}}/{{users.length}}. {{user}} <span *ngIf="isFirst">default</span>
+  </li> -->
+  <button (click)="NotificationToParent()">ChildToParent</button>

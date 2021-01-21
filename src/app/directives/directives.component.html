@@ -1,0 +1,15 @@
+<p>directives works!</p>
+<!-- structure directives -->
+<p *ngIf="isTrue">ngIf Checking here</p>
+<div *ngFor="let hero of heroes; let i=index; let odd=odd; " [class.odd]="odd">
+    ngFor ({{i}}) {{hero.name}}
+  </div>
+<!-- Built-in attribute directives -->
+<br/>
+  <div [ngClass]="isSpecial ? 'special' : ''">ngClass Checking here</div>
+
+  <p>ngStyle</p>
+  <div [ngStyle]="currentStyles">
+    This div is initially italic, bold weight, and extra large (24px).
+  </div>
+

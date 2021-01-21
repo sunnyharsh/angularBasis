@@ -1,0 +1,80 @@
+<div class="container-fluid mb-5">
+    <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
+       <!-- {{userForm.value | json}} -->
+        <br/>
+        <!-- {{userModel | json}}  -->
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" 
+                #name="ngModel" required [(ngModel)]="userModel.name" 
+                minlength=20
+                maxlength=50
+                [class.is-invalid]="name.invalid && name.touched" 
+                name="name" class="form-control" />
+                <div *ngIf="name.dirty && name.invalid">
+                    <small class="text-danger" *ngIf="name.errors?.required" [class.d-none]="name.valid || name.untouched">
+                        Name is required
+                    </small>
+                    <small class="text-danger" *ngIf="name.errors?.minlength">
+                        Name must be at least 20 characters long.
+                    </small> 
+                    <small class="text-danger" *ngIf="name.errors?.maxlength">
+                        Name must be maximum 50 char
+                    </small> 
+                </div>
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" 
+                #mail="ngModel" required [class.is-invalid]="mail.invalid && mail.touched" 
+                [(ngModel)]="userModel.mail" 
+                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                name="mail" class="form-control" />
+                <div *ngIf="mail.dirty && mail.invalid">
+                    <small class="text-danger" *ngIf="mail.errors?.required" [class.d-none]="mail.valid || mail.untouched">
+                        email is required
+                    </small>
+                    <small class="text-danger" *ngIf="mail.errors && mail.errors.pattern">
+                        Email is invalid
+                    </small>
+                </div>
+        </div>
+        <div class="form-group">
+            <label>phone</label>
+            <input type="tel" #phone="ngModel" pattern="^\d{10}$" required
+                    [(ngModel)]="userModel.phone" [class.is-invalid]="phone.invalid && phone.touched"
+                    name="phone" class="form-control" />
+            <div *ngIf="phone.errors && (phone.invalid || phone.touched)">
+                <small class="text-danger" *ngIf="phone.errors.required"> phone number is reqiured</small>
+                <small class="text-danger" *ngIf="phone.errors.pattern">phone number must be 10 digit</small>
+            </div>
+        </div>
+        <div class="form-group" class="dropDown">
+            <label>topics</label>
+              <select required #topic="ngModel" [class.is-invalid]="topic.invalid && topic.touched" 
+                        class="form-select" name="topic" [(ngModel)]="userModel.topic" 
+                        aria-label="Default select example">
+                <option seleted value="default">Open this select menu</option>
+                <option *ngFor="let item of topics" value="item">
+                    {{item}}
+                </option>
+              </select>
+              <small class="text-danger" [class.d-node]="topic.valid || topic.untouched">
+                  please a choose topic
+              </small>
+        </div>
+        <div ngModelGroup="address">
+            <div class="form-group">
+                <label>city</label>
+                <input type="text" [(ngModel)]="userModel.address.city" name="city" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>street</label>
+                <input type="text" [(ngModel)]="userModel.address.street" name="street" class="form-control" />
+            </div>
+        </div>
+        <div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+    </form>
+</div>
